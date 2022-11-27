@@ -1,0 +1,1 @@
+<h2>Utilisation de <img src="https://img.shields.io/badge/JDK-17-yellowgreen"></h2>

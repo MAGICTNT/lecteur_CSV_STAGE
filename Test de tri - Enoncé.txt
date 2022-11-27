@@ -1,0 +1,23 @@
+﻿Objectif :
+Donner un source de programme (langage au choix) pour trier le fichier data.csv.
+
+
+Difficulté 1 : Tri par :
+1. Date_Naissance (croissant)
+
+
+Difficulté 2 : Tri par :
+1. Nom + Prenom (croissant)
+
+
+Difficulté 3 : Tri par :
+1. Poids (décroissant)
+2. Nom (croissant)
+3. Prénom (croissant)
+
+
+Difficulté 4 : Tri par :
+1. Nombre d’enfants (décroissant)
+2. Age (en années, croissant)
+3. Prénom
+4. Nom
