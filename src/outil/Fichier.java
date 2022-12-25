@@ -1,5 +1,6 @@
 package outil;
 
+import metier.Aniversaire;
 import metier.Personne;
 
 import java.io.BufferedReader;
@@ -16,8 +17,7 @@ public class Fichier {
 
     private Charset charset;
 
-    public Fichier(String nomFichier, Charset charset)
-    {
+    public Fichier(String nomFichier, Charset charset) {
         this.nomFichier = nomFichier;
         this.charset = charset;
     }
@@ -52,7 +52,15 @@ public class Fichier {
 
             personne.setNom(list.get(0) + "");
             personne.setPrenom(list.get(1) + "");
-            personne.setDateDeNaissance(list.get(2) + "");
+            String[] splitAniv = list.get(2).split("/");
+            Aniversaire newAniversaire = new Aniversaire();
+            System.out.println(splitAniv[0]);
+            newAniversaire.setJour(splitAniv[0]);
+            if (splitAniv.length > 1) {
+                newAniversaire.setMois(splitAniv[1]);
+                newAniversaire.setAnnee(splitAniv[2]);
+            }
+            personne.setDateDeNaissance(newAniversaire);
             personne.setPoids(list.get(3) + "");
             personne.setParentNom((list.size() == 6) ? list.get(4) + "" : "");
             personne.setParentPrenom((list.size() == 6) ? list.get(5) + "" : "");
@@ -66,10 +74,10 @@ public class Fichier {
     public void ecrire(ArrayList<Personne> lignes) {
 
         try (PrintWriter printwriter = new PrintWriter(
-                new FileWriter(nomFichier,charset))) {
+                new FileWriter(nomFichier, charset))) {
 
             for (Personne ligne : lignes)
-                printwriter.println(ligne.getNom() + "," + ligne.getPrenom() + "," + ligne.getDateDeNaissance() + "," + ligne.getPoids() + "," + ligne.getParentNom() + "," + ligne.getParentPrenom());
+                printwriter.println(ligne.getNom() + "," + ligne.getPrenom() + "," + ligne.getDateDeNaissanceToString() + "," + ligne.getPoids() + "," + ligne.getParentNom() + "," + ligne.getParentPrenom());
 
         } catch (IOException exception) {
             System.out.println(

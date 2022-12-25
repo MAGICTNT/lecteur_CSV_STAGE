@@ -35,54 +35,8 @@ public class Trie {
         return list;
     }
 
-    public ArrayList<Personne> orderByAniv(ArrayList<Personne> list) throws ParseException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        for (int i = 1; i < list.size(); i++) {
-            for (int j = 1; j < i; j++) {
-                if ((dateFormat.parse(list.get(i).getDateDeNaissance()).before(dateFormat.parse(list.get(j).getDateDeNaissance()))))
-                    switchArray(list, i, j);
-            }
-        }
-        return list;
-    }
 
-    public  ArrayList<Personne> orderByPoids(ArrayList<Personne> list) {
-        for (int i = 1; i < list.size(); i++) {
-            for (int j = 1; j < i; j++) {
-                if (Integer.parseInt(list.get(i).getPoids()) > Integer.parseInt(list.get(j).getPoids())) {
-                    switchArray(list, i, j);
-                }
-            }
-        }
-        return list;
-    }
-
-    public  ArrayList<Personne> orderByPrenom(ArrayList<Personne> list) {
-        for (int i = 1; i < list.size(); i++) {
-            for (int j = 1; j < i; j++) {
-                if ((list.get(i).getPrenom().compareTo(list.get(j).getPrenom()) < 0)) {
-                    switchArray(list, i, j);
-
-                }
-            }
-        }
-        return list;
-    }
-
-    public ArrayList<Personne> orderByPoidsNomPrenom(ArrayList<Personne> list) {
-        orderByNom(list);
-        for (int i = 1; i < list.size(); i++) {
-            for (int j = 1; j < i; j++) {
-                if ((list.get(i).getNom().equals(list.get(j).getNom())) && (Integer.parseInt(list.get(i).getPoids()) > Integer.parseInt(list.get(j).getPoids()))) {
-                    switchArray(list, i, j);
-                }
-            }
-        }
-        return list;
-    }
-
-
-    public  ArrayList<Personne> orderByNomEtPrenom(ArrayList<Personne> list) {
+    public ArrayList<Personne> orderByNomEtPrenom(ArrayList<Personne> list) {
         orderByNom(list);
         for (int i = 1; i < list.size(); i++) {
             for (int j = 1; j < i; j++) {
@@ -94,10 +48,49 @@ public class Trie {
         return list;
     }
 
-    public  ArrayList<Personne> orderByNom(ArrayList<Personne> list) {
+    public ArrayList<Personne> orderByNom(ArrayList<Personne> list) {
         for (int i = 1; i < list.size(); i++) {
             for (int j = 1; j < i; j++) {
                 if ((list.get(i).getNom().compareTo(list.get(j).getNom()) < 0)) {
+                    switchArray(list, i, j);
+                }
+            }
+        }
+        return list;
+    }
+
+    public ArrayList<Personne> orderByAniv(ArrayList<Personne> list) {
+        for (int i = 1; i < list.size(); i++) {
+            for (int j = i; j < list.size(); j++) {
+                if (Integer.parseInt(list.get(i).getDateDeNaissance().getAnnee()) == Integer.parseInt(list.get(j).getDateDeNaissance().getAnnee())) {
+                    if (Integer.parseInt(list.get(i).getDateDeNaissance().getMois()) == Integer.parseInt(list.get(j).getDateDeNaissance().getMois())) {
+                        if (Integer.parseInt(list.get(i).getDateDeNaissance().getJour()) > Integer.parseInt(list.get(j).getDateDeNaissance().getJour())) {
+                            switchArray(list, i, j);
+                        }
+                    } else if (Integer.parseInt(list.get(i).getDateDeNaissance().getMois()) > Integer.parseInt(list.get(j).getDateDeNaissance().getMois())) {
+                        switchArray(list, i, j);
+                    }
+                } else if (Integer.parseInt(list.get(i).getDateDeNaissance().getAnnee()) > Integer.parseInt(list.get(j).getDateDeNaissance().getAnnee())) {
+                    switchArray(list, i, j);
+                }
+            }
+        }
+        return list;
+    }
+
+    public ArrayList<Personne> choix3(ArrayList<Personne> list) {
+        for (int i = 1; i < list.size(); i++) {
+            for (int j = i; j < list.size(); j++) {
+                if (Integer.parseInt(list.get(i).getPoids()) == Integer.parseInt(list.get(j).getPoids())) {
+                    System.out.println(list.get(i).getPrenom().compareTo(list.get(j).getPrenom()));
+                    if ((list.get(i).getPrenom().compareTo(list.get(j).getPrenom()) < 0)) {
+                        if ((list.get(i).getNom().compareTo(list.get(j).getNom()) >= 0)) {
+                            switchArray(list, i, j);
+                        }
+                    } else {
+                        switchArray(list, i, j);
+                    }
+                } else if (Integer.parseInt(list.get(i).getPoids()) < Integer.parseInt(list.get(j).getPoids())) {
                     switchArray(list, i, j);
                 }
             }

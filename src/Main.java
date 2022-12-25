@@ -31,9 +31,9 @@ public class Main {
             BufferedReader bf = new BufferedReader(new FileReader(fichierCSV));
             listCsv = fichier.lecture(bf);
 
-            String choixPossibilite = "5";
 
-            choixPossibilite = affichage.choix(monScanner, choixPossibilite);
+
+            String choixPossibilite= affichage.choix(monScanner);
 
             System.out.println("\n");
 

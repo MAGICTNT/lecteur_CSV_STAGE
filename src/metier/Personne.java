@@ -4,19 +4,21 @@ public class Personne implements Comparable<Personne>{
 
     private String nom;
     private String prenom;
-    private String dateDeNaissance;
+    private Aniversaire dateDeNaissance;
     private String poids;
     private String parentNom;
     private String parentPrenom;
 
-    public Personne(String nom, String prenom, String dateDeNaissance, String parentNom, String parentPrenom) {
+    public Personne() {
+    }
+
+    public Personne(String nom, String prenom, Aniversaire dateDeNaissance, String poids, String parentNom, String parentPrenom) {
         this.nom = nom;
         this.prenom = prenom;
         this.dateDeNaissance = dateDeNaissance;
+        this.poids = poids;
         this.parentNom = parentNom;
         this.parentPrenom = parentPrenom;
-    }
-    public Personne() {
     }
 
     public String getNom() {
@@ -35,12 +37,24 @@ public class Personne implements Comparable<Personne>{
         this.prenom = prenom;
     }
 
-    public String getDateDeNaissance() {
+    public Aniversaire getDateDeNaissance() {
         return dateDeNaissance;
     }
 
-    public void setDateDeNaissance(String dateDeNaissance) {
+    public String getDateDeNaissanceToString(){
+        return dateDeNaissance.getJour() + "/" + dateDeNaissance.getMois() + "/" + dateDeNaissance.getAnnee();
+    }
+
+    public void setDateDeNaissance(Aniversaire dateDeNaissance) {
         this.dateDeNaissance = dateDeNaissance;
+    }
+
+    public String getPoids() {
+        return poids;
+    }
+
+    public void setPoids(String poids) {
+        this.poids = poids;
     }
 
     public String getParentNom() {
@@ -57,14 +71,6 @@ public class Personne implements Comparable<Personne>{
 
     public void setParentPrenom(String parentPrenom) {
         this.parentPrenom = parentPrenom;
-    }
-
-    public String getPoids() {
-        return poids;
-    }
-
-    public void setPoids(String poids) {
-        this.poids = poids;
     }
 
     @Override

@@ -12,34 +12,38 @@ public class Affichage {
 
     public void showTableau(ArrayList<Personne> list) {
         for (Personne value : list)
-            System.out.println(value.getNom() + " " + value.getPrenom() + " " + value.getDateDeNaissance() + " " + value.getPoids() + " " + value.getParentNom() + " " + value.getParentPrenom() + " ");
+            System.out.println(value.getNom() + "," + value.getPrenom() + "," + value.getDateDeNaissanceToString() + "," + value.getPoids() + "," + value.getParentNom() + "," + value.getParentPrenom());
+
     }
 
-
-    public  void questionEcriture(Scanner monScanner, ArrayList<Personne> testArray, Fichier fichier) {
+    public void questionEcriture(Scanner monScanner, ArrayList<Personne> testArray, Fichier fichier) {
         System.out.println("\n");
         System.out.println("Voulez-vous réécrire le fichier ?");
-        System.out.print("O/N : " );
+        System.out.print("O/N : ");
         String response;
         response = monScanner.nextLine();
-        if (response.matches("[yY|o|O|n|N]"))
+        if (response.matches("[y|Y|o|O|n|N]"))
             fichier.ecrire(testArray);
     }
 
-    public  String choix(Scanner monScanner, String order) {
-        while (!order.matches("[0-3]")) {
+    public String choix(Scanner monScanner) {
+        String choixPossible = "null";
+        while (!choixPossible.matches("[0-3]")) {
             System.out.println("Qu'elle trie, voulez vous faire ?");
             System.out.println("Triée par Date de Naissance                             -> 1");
             System.out.println("Triée par nom et prénom                                 -> 2");
             System.out.println("Triée par poids, nom et prénom                          -> 3");
 //            System.out.println("Triée par nombre d'enfants, age, prénom et nom         -> 4");
             System.out.print("Qu'elle est votre choix ?\n ");
-            order = monScanner.nextLine();
+            choixPossible = monScanner.nextLine();
+            if(!choixPossible.matches("[0-3]")){
+                System.out.println("Choix non prix en charge");
+            }
         }
-        return order;
+        return choixPossible;
     }
 
-    public  void retourChoix(ArrayList<Personne> testArray, Trie trie, String order) throws ParseException {
+    public void retourChoix(ArrayList<Personne> testArray, Trie trie, String order) throws ParseException {
         switch (Integer.parseInt(order)) {
             case 1:
                 System.out.println("Ordre par Date Naissance");
@@ -54,11 +58,11 @@ public class Affichage {
             case 3:
                 System.out.println("Ordre par poids, prénom et nom");
                 System.out.println("------------------------------\n");
-                trie.orderByPoidsNomPrenom(testArray);
+                trie.choix3(testArray);
                 break;
 //            case 4:
 //                System.out.println("Ordre par nombre d'enfants, age, prénom et nom");
-//                trie.orderByNameParent(testArray);
+//                trie.orderByAniv(testArray);
 //                break;
         }
     }
