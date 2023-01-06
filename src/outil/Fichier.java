@@ -41,6 +41,7 @@ public class Fichier {
     public ArrayList<Personne> lecture(BufferedReader bf) throws IOException {
         String ligne = "";
         Personne personne;
+        Trie trie = new Trie();
         int boucle = 0;
         ArrayList<Personne> listPersonne = new ArrayList<>();
         while ((ligne = bf.readLine()) != null) {
@@ -68,17 +69,23 @@ public class Fichier {
 
             boucle++;
         }
+        trie.ajoutEnfant(listPersonne);
         return listPersonne;
     }
 
     public void ecrire(ArrayList<Personne> lignes) {
-
+        int flag = 0;
         try (PrintWriter printwriter = new PrintWriter(
                 new FileWriter(nomFichier, charset))) {
 
-            for (Personne ligne : lignes)
-                printwriter.println(ligne.getNom() + "," + ligne.getPrenom() + "," + ligne.getDateDeNaissanceToString() + "," + ligne.getPoids() + "," + ligne.getParentNom() + "," + ligne.getParentPrenom());
-
+            for (Personne ligne : lignes) {
+                if (flag == 0) {
+                    printwriter.println(ligne.getNom() + "," + ligne.getPrenom() + "," + ligne.getDateDeNaissance().getJour() + "," + ligne.getPoids() + "," + ligne.getParentNom() + "," + ligne.getParentPrenom());
+                    flag++;
+                } else {
+                    printwriter.println(ligne.getNom() + "," + ligne.getPrenom() + "," + ligne.getDateDeNaissanceToString() + "," + ligne.getPoids() + "," + ligne.getParentNom() + "," + ligne.getParentPrenom());
+                }
+            }
         } catch (IOException exception) {
             System.out.println(
                     "Erreur lors de l'écriture : " + exception.getMessage());

@@ -8,17 +8,19 @@ public class Personne implements Comparable<Personne>{
     private String poids;
     private String parentNom;
     private String parentPrenom;
+    private int nombreEnfant = 0;
 
     public Personne() {
     }
 
-    public Personne(String nom, String prenom, Aniversaire dateDeNaissance, String poids, String parentNom, String parentPrenom) {
+    public Personne(String nom, String prenom, Aniversaire dateDeNaissance, String poids, String parentNom, String parentPrenom, int nombreEnfant) {
         this.nom = nom;
         this.prenom = prenom;
         this.dateDeNaissance = dateDeNaissance;
         this.poids = poids;
         this.parentNom = parentNom;
         this.parentPrenom = parentPrenom;
+        this.nombreEnfant = nombreEnfant;
     }
 
     public String getNom() {
@@ -71,6 +73,14 @@ public class Personne implements Comparable<Personne>{
 
     public void setParentPrenom(String parentPrenom) {
         this.parentPrenom = parentPrenom;
+    }
+
+    public int getNombreEnfant() {
+        return nombreEnfant;
+    }
+
+    public void setNombreEnfant(int nombreEnfant) {
+        this.nombreEnfant = nombreEnfant;
     }
 
     @Override
